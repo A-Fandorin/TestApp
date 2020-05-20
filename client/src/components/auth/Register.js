@@ -1,8 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
+import { register } from '../../actions/auth';
 
-const Register = () => {
+const Register = ({ setAlert, register, isAuth }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,27 +17,36 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const login = async e => {
     if (password !== password2) {
-      console.log('Pass do ot Match');
+      setAlert('Pass do ot Match', 'danger');
     } else {
-      const newUser = {
+      register({
         name,
         email,
         password,
-      };
-      try {
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-        const body = JSON.stringify(newUser);
-        const res = await axios.post('/api/users', body, config);
-        console.log(res.data);
-      } catch (err) {
-        console.error(err.response.data);
-      }
+      });
+      // const newUser = {
+      //   name,
+      //   email,
+      //   password,
+      // };
+      // try {
+      //   const config = {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   };
+      //   const body = JSON.stringify(newUser);
+      //   const res = await axios.post('/api/users', body, config);
+      //   console.log(res.data);
+      // } catch (err) {
+      //   console.error(err.response.data);
+      // }
     }
   };
+
+  if (isAuth) {
+    return <Redirect to='/menu' />;
+  }
   return (
     <Fragment>
       <h2
@@ -97,7 +109,7 @@ const Register = () => {
       <div className='pt-2'>
         <small className='text-muted'>
           <em>
-            Already have an account?<Link to='/'> Sign In</Link>
+            Already have an account?<Link to='/login'> Sign In</Link>
           </em>
         </small>
       </div>
@@ -105,4 +117,13 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool,
+};
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(null, { setAlert, register })(Register);
