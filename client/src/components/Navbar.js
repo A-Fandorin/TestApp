@@ -37,10 +37,12 @@ const Navbar = ({ auth: { isAuth, loading }, logout }) => {
   const guestLinks = (
     <ul className='navbar-nav ml-md-auto'>
       <li className='nav-item pr-3'>
-        <Link to='/login'>Login</Link>
+        <Link to='/login'>Вход</Link>
       </li>
       <li className='nav-item'>
-        <Link to='/register'>Register</Link>
+        <Link className='disabled' to='/register'>
+          Регистриация
+        </Link>
       </li>
     </ul>
   );

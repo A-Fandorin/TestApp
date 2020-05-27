@@ -7,17 +7,17 @@ const Landing = () => {
       <div className='container-fluid bg'>
         <div className='hero-text'>
           <h1 className='mb-3 d-none d-sm-block'>
-            <strong>iSecurity Systems</strong>
+            <strong>iSecurity</strong>
           </h1>
           <h5 className='mb-3'>
             <em>Report System for Capro-Oil Security</em>
           </h5>
           <div className='d-none d-md-block'>
-            <Link className='btn btn-danger mr-md-4' to='/register'>
-              Register
+            <Link className='btn btn-danger mr-md-4 disabled' to='/register'>
+              Регистрация
             </Link>
             <Link className='btn btn-info' to='/login'>
-              Login
+              Вход
             </Link>
           </div>
         </div>

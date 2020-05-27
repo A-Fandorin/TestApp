@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
@@ -48,7 +48,7 @@ const Register = ({ setAlert, register, isAuth }) => {
     return <Redirect to='/menu' />;
   }
   return (
-    <Fragment>
+    <div className='container'>
       <h2
         className='pt-4 pb-1'
         style={{
@@ -113,7 +113,7 @@ const Register = ({ setAlert, register, isAuth }) => {
           </em>
         </small>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
