@@ -98,13 +98,13 @@ const Cars = () => {
       brutto === '' ||
       netto === ''
     ) {
-      console.log('Заполните все поля пожалуйста...');
+      alert('Заполните все поля пожалуйста...');
     } else {
       fetch(`/cars`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(info),
-      }).then(console.log('Отчет сохранен!', 'success'));
+      }).then(alert('Отчет сохранен!', 'success'));
       setBrutto('');
       setinout('');
       setDate('');

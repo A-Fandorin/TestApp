@@ -17,7 +17,7 @@ const Register = ({ setAlert, register, isAuth }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const login = async e => {
     if (password !== password2) {
-      setAlert('Pass do ot Match', 'danger');
+      setAlert('Pass do not Match', 'danger');
     } else {
       register({
         name,
