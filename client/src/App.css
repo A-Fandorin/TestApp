@@ -1,7 +1,7 @@
 .bg {
   position: relative;
   background-image: url('./img/security.jpg');
-  height: 100vh;
+  height: 90vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -20,7 +20,15 @@
 .nav-item a {
   color: black !important;
 }
+.nav-item a.disabled {
+  color: gray !important;
+}
 .nav-item a:hover {
   color: olive !important;
   text-decoration: none;
+}
+
+input {
+  box-shadow: none !important;
+  padding: 7px;
 }

@@ -16,7 +16,7 @@ const Login = ({ login, isAuth }) => {
     login(email, password);
   };
   if (isAuth) {
-    return <Redirect to='/menu' />;
+    return <Redirect to='/admin' />;
   }
   return (
     <Fragment>

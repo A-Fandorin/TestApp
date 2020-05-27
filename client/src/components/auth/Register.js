@@ -126,4 +126,4 @@ const mapStateToProps = state => ({
   isAuth: state.auth.isAuth,
 });
 
-export default connect(null, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);

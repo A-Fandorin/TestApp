@@ -14,6 +14,10 @@ import store from './store';
 import PrivatRoute from './components/routing/PrivateRoute';
 
 import './App.css';
+import Admin from './components/Admin';
+import CompanyBase from './components/CompanyBase';
+import Report from './components/Report';
+import Cars from './components/Cars';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -34,6 +38,14 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <PrivatRoute exact path='/admin' component={Admin} />
+              <PrivatRoute
+                exact
+                path='/admin/company'
+                component={CompanyBase}
+              />
+              <PrivatRoute exact path='/report' component={Report} />
+              <PrivatRoute exact path='/report/auto' component={Cars} />
             </Switch>
           </div>
         </Fragment>
