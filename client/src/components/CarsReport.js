@@ -100,6 +100,11 @@ const Cars = () => {
     ) {
       alert('Заполните все поля пожалуйста...');
     } else {
+      fetch('/cars/telegram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(info),
+      });
       fetch(`/cars`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -144,8 +149,8 @@ const Cars = () => {
               value={inout}
               onChange={e => setinout(e.target.value)}
             >
-              <option value='Въезд'>Сырье</option>
-              <option value='Выезд'>Готовая продукция</option>
+              <option value='Сырье'>Сырье</option>
+              <option value='Готовая продукция'>Готовая продукция</option>
             </Form.Control>
             <Form.Label className='mt-2'>Дата</Form.Label>
             <Form.Control
@@ -236,7 +241,7 @@ const Cars = () => {
           <thead className='table-dark'>
             <tr>
               <th scope='col'>#</th>
-              <th scope='col'>Вьезд/Выезд</th>
+              <th scope='col'>Сырье/ГП</th>
               <th scope='col' style={{ width: '8%' }}>
                 Дата
               </th>
