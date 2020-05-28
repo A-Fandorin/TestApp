@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 router.post('/telegram', jsonParser, function (req, res) {
   let infos = [
     req.body.inOut,
-    '<b>Дата: </b>' + req.body.date,
+    '<b>Дата: </b>' + new Date(req.body.date).toLocaleDateString(),
     '<b>Время: </b>' + req.body.time,
     '<b>Компания: </b>' + req.body.company,
     '<b>Гос. номер Авто </b>' + req.body.sign,
