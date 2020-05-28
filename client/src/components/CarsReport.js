@@ -127,8 +127,8 @@ const Cars = () => {
       <td>{item.sign}</td>
       <td>{item.driver}</td>
       <td>{item.ttn}</td>
-      <td>{item.tara} кг</td>
       <td>{item.brutto} кг</td>
+      <td>{item.tara} кг</td>
       <td>{item.netto} кг</td>
     </tr>
   ));
@@ -138,14 +138,14 @@ const Cars = () => {
       <Container>
         <Row className='mt-5'>
           <Form.Group as={Col}>
-            <Form.Label className='mt-2'>Въезд/Выезд</Form.Label>
+            <Form.Label className='mt-2'>Сырье/Готовая продукция</Form.Label>
             <Form.Control
               as='select'
               value={inout}
               onChange={e => setinout(e.target.value)}
             >
-              <option value='Въезд'>Въезд</option>
-              <option value='Выезд'>Выезд</option>
+              <option value='Въезд'>Сырье</option>
+              <option value='Выезд'>Готовая продукция</option>
             </Form.Control>
             <Form.Label className='mt-2'>Дата</Form.Label>
             <Form.Control
@@ -185,7 +185,10 @@ const Cars = () => {
             />
             <datalist id='nomer'>
               {nomer.map(item => (
-                <option key={item._id} value={item.autosign} />
+                <option
+                  key={item._id}
+                  value={`${item.auto} ${item.autosign}`}
+                />
               ))}
             </datalist>
             <Form.Label className='mt-2'>Ф.И.О. водителя</Form.Label>
@@ -198,7 +201,7 @@ const Cars = () => {
                 <option key={item._id} value={item.driverId} />
               ))}
             </datalist>
-            <Form.Label className='mt-2'>№ ТТН</Form.Label>
+            <Form.Label className='mt-2'>№ ТТН (груз/нетто по ТТН)</Form.Label>
             <Form.Control
               type='text'
               value={ttn}
@@ -242,10 +245,10 @@ const Cars = () => {
               <th scope='col'>Гос. номер авто</th>
               <th scope='col'>Ф.И.О. водителя</th>
               <th scope='col'>№ ТТН</th>
+              <th scope='col'>Брутто (кг)</th>
               <th scope='col' style={{ width: '7%' }}>
                 Тара
               </th>
-              <th scope='col'>Брутто (кг)</th>
               <th scope='col'>Netto (кг)</th>
             </tr>
           </thead>
