@@ -16,8 +16,10 @@ import PrivatRoute from './components/routing/PrivateRoute';
 import './App.css';
 import Admin from './components/Admin';
 import CompanyBase from './components/CompanyBase';
+import AutoBase from './components/AutoBase';
 import Report from './components/Report';
-import Cars from './components/Cars';
+import CarsReport from './components/CarsReport';
+import DriverBase from './components/DriverBase';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -44,8 +46,10 @@ const App = () => {
                 path='/admin/company'
                 component={CompanyBase}
               />
+              <PrivatRoute exact path='/admin/auto' component={AutoBase} />
+              <PrivatRoute exact path='/admin/drivers' component={DriverBase} />
               <PrivatRoute exact path='/report' component={Report} />
-              <PrivatRoute exact path='/report/auto' component={Cars} />
+              <PrivatRoute exact path='/report/auto' component={CarsReport} />
             </Switch>
           </div>
         </Fragment>

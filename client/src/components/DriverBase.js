@@ -3,14 +3,14 @@ import Table from 'react-bootstrap/Table';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
-let CompanyBase = () => {
-  const [company, setCompany] = useState('');
+let DriverBase = () => {
+  const [driverId, setDriverId] = useState('');
   const [agent, setAgent] = useState([]);
 
   useEffect(() => {
     let ignore = false;
     async function fetchData() {
-      let res = await fetch(`/companyDB`);
+      let res = await fetch(`/driverDB`);
       let list = await res.json();
       if (!ignore) setAgent(list);
     }
@@ -21,7 +21,7 @@ let CompanyBase = () => {
   }, [agent]);
 
   let deleteObj = e => {
-    fetch(`/companyDB/${e.target.id}`, {
+    fetch(`/driverDB/${e.target.id}`, {
       method: 'DELETE',
     }).then(res => res.text());
   };
@@ -29,7 +29,7 @@ let CompanyBase = () => {
   const changeObj = async e => {
     let button = e.target;
     const { value: newValue } = await Swal.fire({
-      title: 'Введите новое название компании',
+      title: 'Введите Ф.И.О. водителя',
       input: 'text',
       inputValue: e.target.name,
       showCancelButton: true,
@@ -39,8 +39,8 @@ let CompanyBase = () => {
         }
       },
     });
-    let object = { company: newValue };
-    fetch(`/companyDB/${button.id}`, {
+    let object = { driverId: newValue };
+    fetch(`/driverDB/${button.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(object),
@@ -48,17 +48,17 @@ let CompanyBase = () => {
   };
   let sendReq = () => {
     let object = {
-      company: company,
+      driverId: driverId,
     };
-    if (company === '') {
+    if (driverId === '') {
       console.log('Заполните все поля пожалуйста...');
     } else {
-      fetch(`/companyDB`, {
+      fetch(`/driverDB`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(object),
       }).then(console.log('Добавлено', 'success'));
-      setCompany('');
+      setDriverId('');
     }
   };
   return (
@@ -69,9 +69,9 @@ let CompanyBase = () => {
       <div className='row'>
         <div className='col-sm-4 pt-3'>
           <input
-            placeholder='Наименовании компании'
-            value={company}
-            onChange={e => setCompany(e.target.value)}
+            placeholder='Ф.И.О. водителя'
+            value={driverId}
+            onChange={e => setDriverId(e.target.value)}
             className='form-control border-info'
           />
         </div>
@@ -85,7 +85,7 @@ let CompanyBase = () => {
         <thead className='table-dark'>
           <tr>
             <th scope='col'>#</th>
-            <th scope='col'>Наменование компании</th>
+            <th scope='col'>Ф.И.О. водителя</th>
             <th scope='col'></th>
             <th scope='col'></th>
           </tr>
@@ -94,12 +94,12 @@ let CompanyBase = () => {
           {agent.map((item, index) => (
             <tr key={item._id}>
               <td className='text-center'>{index + 1}</td>
-              <td>{item.company}</td>
+              <td>{item.driverId}</td>
               <td className='text-center'>
                 <button
                   onClick={changeObj}
                   className='btn btn-sm btn-outline-info'
-                  name={item.company}
+                  name={item.driverId}
                   id={item._id}
                 >
                   Изменить
@@ -122,4 +122,4 @@ let CompanyBase = () => {
   );
 };
 
-export default CompanyBase;
+export default DriverBase;

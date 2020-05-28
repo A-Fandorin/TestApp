@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Report = () => {
   return (
-    <Fragment>
+    <div className='container'>
       <h2 className='py-3 text-center'>Отчеты</h2>
       <hr />
       <button className='btn btn-outline-warning'>
@@ -21,7 +21,7 @@ const Report = () => {
       <button className='btn btn-outline-warning ml-3'>
         <Link to='/report/pass'>Временные пропуска</Link>
       </button> */}
-    </Fragment>
+    </div>
   );
 };
 

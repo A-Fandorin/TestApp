@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 let AutoBase = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ let AutoBase = () => {
   useEffect(() => {
     let ignore = false;
     async function fetchData() {
-      let res = await fetch('/autos');
+      let res = await fetch('/autoDB');
       let arr = await res.json();
       if (!ignore) setAutos(arr);
     }
@@ -36,7 +37,7 @@ let AutoBase = () => {
       trailer: trailer,
       trailersign: trailersign,
     };
-    fetch('/autos', {
+    fetch('/autoDB', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(obj),
@@ -44,20 +45,22 @@ let AutoBase = () => {
   };
 
   let deleteObj = e => {
-    fetch(`/autos/${e.target.id}`, {
+    fetch(`/autoDB/${e.target.id}`, {
       method: 'DELETE',
     }).then(res => res.text());
   };
 
   let changeObj = async e => {
     let button = e.target;
+    let res = await fetch(`/autoDB/${button.id}`);
+    let car = await res.json();
     const { value: formValues } = await Swal.fire({
       title: 'Введите данные',
       html:
-        `<input id="auto" class="swal2-input" placeholder='Auto'>` +
-        `<input id="autosign" class="swal2-input" placeholder='Autosign'>` +
-        `<input id="trailer" class="swal2-input" placeholder='trailer'>` +
-        `<input id="trailersign" class="swal2-input" placeholder='trailersign'>`,
+        `<input id="auto" class="swal2-input" value=${car.auto}>` +
+        `<input id="autosign" class="swal2-input" value=${car.autosign}>` +
+        `<input id="trailer" class="swal2-input" value=${car.trailer}>` +
+        `<input id="trailersign" class="swal2-input" value=${car.trailersign}>`,
       focusConfirm: false,
       preConfirm: () => {
         return [
@@ -69,7 +72,7 @@ let AutoBase = () => {
       },
     });
     if (formValues) {
-      fetch(`/autos/${button.id}`, {
+      fetch(`/autoDB/${button.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formValues),
@@ -78,9 +81,13 @@ let AutoBase = () => {
   };
 
   return (
-    <>
+    <div className='container'>
       <form>
-        <div className='row pt-5'>
+        <button className='btn btn-sm btn-outline-dark mt-3'>
+          <Link to='/admin'>Назад</Link>
+        </button>
+
+        <div className='row pt-3'>
           <div className='col'>
             <input
               placeholder='Марка авто'
@@ -133,30 +140,31 @@ let AutoBase = () => {
             <th scope='col'>Прицеп</th>
             <th scope='col'>Гос. номер прицепа</th>
             <th scope='col'></th>
+            <th scope='col'></th>
           </tr>
         </thead>
         <tbody>
           {autos.map((item, i) => (
             <tr key={item._id}>
-              <td>{i + 1}</td>
+              <td className='text-center'>{i + 1}</td>
               <td>{item.auto}</td>
               <td>{item.autosign}</td>
               <td>{item.trailer}</td>
               <td>{item.trailersign}</td>
-              <td>
+              <td className='text-center'>
                 <button
                   onClick={changeObj}
-                  className='btn btn-outline-info'
+                  className='btn btn-sm btn-outline-info'
                   id={item._id}
                   name={item.autosign}
                 >
-                  Change
+                  Изменить
                 </button>
               </td>
-              <td>
+              <td className='text-center'>
                 <button
                   onClick={deleteObj}
-                  className='btn btn-outline-danger'
+                  className='btn btn-sm btn-outline-danger'
                   id={item._id}
                 >
                   X
@@ -166,7 +174,7 @@ let AutoBase = () => {
           ))}
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };
 

@@ -10,8 +10,9 @@ app.use(express.json({ extended: false }));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/cars', require('./routes/api/cars'));
-app.use('/companies', require('./routes/api/companies'));
-app.use('/autos', require('./routes/api/autos.js'));
+app.use('/companyDB', require('./routes/api/companyDB'));
+app.use('/driverDB', require('./routes/api/driverDB'));
+app.use('/autoDB', require('./routes/api/autoDB.js'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

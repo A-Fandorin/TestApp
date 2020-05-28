@@ -8,8 +8,8 @@ const Navbar = ({ auth: { isAuth, loading }, logout }) => {
     <>
       <ul className='navbar-nav mr-md-auto'>
         <li className='nav-item'>
-          <Link className='nav-link disabled' to='/admin'>
-            <strong>База данных</strong>
+          <Link className='nav-link' to='/admin'>
+            База данных
           </Link>
         </li>
         <li className='nav-item'>
@@ -19,7 +19,7 @@ const Navbar = ({ auth: { isAuth, loading }, logout }) => {
         </li>
         <li className='nav-item'>
           <Link className='nav-link disabled' to='/report'>
-            <strong>Поиск информации</strong>
+            Поиск информации
           </Link>
         </li>
         <li className='nav-item mr-3'>
@@ -28,7 +28,7 @@ const Navbar = ({ auth: { isAuth, loading }, logout }) => {
           </Link>
         </li>
       </ul>
-      <button className='btn btn-danger' onClick={logout}>
+      <button className='btn btn-danger btn-sm' onClick={logout}>
         Выход
       </button>
     </>

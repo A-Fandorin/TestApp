@@ -8,6 +8,16 @@
   position: relative;
 }
 
+table th {
+  font-size: 0.9rem !important;
+  padding: 10px !important;
+}
+
+table td {
+  font-size: 0.7rem !important;
+  padding: 10px !important;
+}
+
 .hero-text {
   text-align: center;
   position: absolute;
